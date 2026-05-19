@@ -5,6 +5,7 @@ import { fetchStats } from "../../store/slices/adminSlice";
 export default function Dashboard() {
     const dispatch = useDispatch();
     const { stats, loading, error } = useSelector((state) => state.admin);
+    const { user } = useSelector((state) => state.auth);
 
     useEffect(() => {
         dispatch(fetchStats());
@@ -38,12 +39,23 @@ export default function Dashboard() {
         "from-emerald-500 to-teal-400",
     ];
 
+
     return (
         <div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-8">Dashboard Overview</h1>
-            
+            <div className="mb-8">
+                {user?.role === "judge" ? (
+                    <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-8 text-white shadow-xl shadow-blue-500/20">
+                        <h1 className="text-4xl font-extrabold mb-2">Welcome to Naat Competition</h1>
+                        <p className="text-blue-100 text-lg opacity-90">Honorable Judge, <span className="font-bold underline decoration-blue-300 underline-offset-4">{user.name}</span></p>
+                        <p className="mt-4 text-sm bg-white/10 w-fit px-4 py-2 rounded-full backdrop-blur-sm">Evaluation Portal Active</p>
+                    </div>
+                ) : (
+                    <h1 className="text-3xl font-bold text-gray-800">Dashboard Overview</h1>
+                )}
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {Object.entries(stats).map(([key, value], index) => {
+                {Object.entries(stats || {}).map(([key, value], index) => {
                     const gradient = colorMap[index % colorMap.length];
                     return (
                         <div key={key} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">

@@ -49,7 +49,7 @@ const loginAdmin = async (data) => {
         }
 
         const token = jwt.sign(
-            { id: admin._id, role: admin.role },
+            { id: admin._id, role: admin.role, name: admin.name },
             SECRET,
             { expiresIn: "1d" }
         );
@@ -62,7 +62,8 @@ const loginAdmin = async (data) => {
                 admin: {
                     id: admin._id,
                     name: admin.name,
-                    email: admin.email
+                    email: admin.email,
+                    role: admin.role
                 }
             }
         };

@@ -52,6 +52,30 @@ export const deleteUser = createAsyncThunk(
     }
 );
 
+export const toggleRoundSelection = createAsyncThunk(
+    'admin/toggleRoundSelection',
+    async ({ id, isSelected }, { rejectWithValue }) => {
+        try {
+            await API.put(`/admin/registrations/${id}/roundSelection`, { isSelected });
+            return { id, isSelected };
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'Failed to update round selection');
+        }
+    }
+);
+
+export const rejectRound1 = createAsyncThunk(
+    'admin/rejectRound1',
+    async ({ id, reason }, { rejectWithValue }) => {
+        try {
+            await API.put(`/admin/registrations/${id}/rejectRound1`, { reason });
+            return { id, reason };
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'Failed to reject round 1');
+        }
+    }
+);
+
 const initialState = {
     stats: {},
     users: [],
@@ -95,11 +119,29 @@ const adminSlice = createSlice({
                 const userIndex = state.users.findIndex(u => u._id === id);
                 if (userIndex !== -1) {
                     state.users[userIndex].payment.status = status;
+                    state.users[userIndex].registrationStatus = status;
                 }
             })
             // Delete User
             .addCase(deleteUser.fulfilled, (state, action) => {
                 state.users = state.users.filter(u => u._id !== action.payload);
+            })
+            // Toggle Round Selection
+            .addCase(toggleRoundSelection.fulfilled, (state, action) => {
+                const { id, isSelected } = action.payload;
+                const userIndex = state.users.findIndex(u => u._id === id);
+                if (userIndex !== -1) {
+                    state.users[userIndex].isRound2Selected = isSelected;
+                }
+            })
+            // Reject Round 1
+            .addCase(rejectRound1.fulfilled, (state, action) => {
+                const { id, reason } = action.payload;
+                const userIndex = state.users.findIndex(u => u._id === id);
+                if (userIndex !== -1) {
+                    state.users[userIndex].isRound1Rejected = true;
+                    state.users[userIndex].reason = reason;
+                }
             });
     },
 });

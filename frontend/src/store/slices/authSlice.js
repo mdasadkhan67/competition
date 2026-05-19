@@ -9,6 +9,7 @@ export const adminLogin = createAsyncThunk(
             // The backend returns { success, message, data: { token, admin } }
             const { token, admin } = res.data.data;
             localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(admin));
             return { token, user: admin };
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || 'Login failed');
@@ -17,7 +18,7 @@ export const adminLogin = createAsyncThunk(
 );
 
 const initialState = {
-    user: null,
+    user: JSON.parse(localStorage.getItem('user')) || JSON.parse(localStorage.getItem('admin')) || null,
     token: localStorage.getItem('token') || null,
     loading: false,
     error: null,
@@ -31,6 +32,7 @@ const authSlice = createSlice({
             state.user = null;
             state.token = null;
             localStorage.removeItem('token');
+            localStorage.removeItem('user');
         },
     },
     extraReducers: (builder) => {

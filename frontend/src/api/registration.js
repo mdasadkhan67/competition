@@ -36,3 +36,8 @@ export const checkStatus = async (regId) => {
     const res = await API.get(`/status/${regId}`);
     return res.data;
 };
+
+export const submitFinalNaat = async (regId, naatTitle) => {
+    const res = await API.put(`/status/${regId}/naat`, { naatTitle });
+    return res.data;
+};

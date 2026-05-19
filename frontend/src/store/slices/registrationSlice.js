@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { checkStatus, registerUser } from '../../api/registration';
+import { checkStatus, registerUser, submitFinalNaat as submitFinalNaatApi } from '../../api/registration';
+import { getApiError } from '../../api/getApiError';
 
 // Async thunk for checking status
 export const fetchStatus = createAsyncThunk(
@@ -7,9 +8,9 @@ export const fetchStatus = createAsyncThunk(
     async (regId, { rejectWithValue }) => {
         try {
             const response = await checkStatus(regId);
-            return response.data; // Assuming your checkStatus function returns { data: ... }
+            return response.data;
         } catch (error) {
-            return rejectWithValue(error.response?.data?.message || 'Something went wrong');
+            return rejectWithValue(getApiError(error));
         }
     }
 );
@@ -23,6 +24,19 @@ export const submitRegistration = createAsyncThunk(
             return response;
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || 'Registration failed');
+        }
+    }
+);
+
+// Async thunk for submitting final round naat
+export const submitFinalNaat = createAsyncThunk(
+    'registration/submitFinalNaat',
+    async ({ regId, naatTitle }, { rejectWithValue }) => {
+        try {
+            const response = await submitFinalNaatApi(regId, naatTitle);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'Failed to submit selection');
         }
     }
 );
@@ -74,6 +88,12 @@ const registrationSlice = createSlice({
             .addCase(submitRegistration.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+            })
+            // Handle submitFinalNaat
+            .addCase(submitFinalNaat.fulfilled, (state, action) => {
+                if (state.statusData) {
+                    state.statusData.finalRoundNaat = action.payload.finalRoundNaat;
+                }
             });
     },
 });

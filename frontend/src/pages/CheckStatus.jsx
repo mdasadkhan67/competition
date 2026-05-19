@@ -59,9 +59,10 @@ export default function CheckStatus() {
                 {error && (
                     <div className="text-red-500 text-sm mt-3 bg-red-50 border border-red-200 rounded-xl p-4">
                         <p className="font-semibold mb-2">
-                            ❌  {error}
+                            ❌ {typeof error === "string" ? error : error.message}
                         </p>
 
+                        {typeof error === "object" && error.type === "not_found" && (
                         <ol className="list-decimal pl-5 space-y-2">
                             <li>
                                 Please check and verify that your registration number is 100% correct.
@@ -84,6 +85,7 @@ export default function CheckStatus() {
                                 Kindly contact us or register again with proper details.
                             </li>
                         </ol>
+                        )}
 
                         <p className="mt-4 font-medium">
                             Contact Us:
@@ -99,37 +101,39 @@ export default function CheckStatus() {
 
                 {/* Result */}
                 {data && (
-                    <div className="mt-5 p-4 rounded-lg border">
+                    <div className="mt-5 space-y-4 text-left">
 
-                        {/* Pending */}
-                        {data.registrationStatus === "pending" && (
-                            <div className="text-yellow-600 font-semibold">
-                                ⏳ Pending
-                                <p className="text-sm text-gray-500 mt-1">
-                                    Your payment is under verification
-                                </p>
-                            </div>
-                        )}
+                        {/* Payment Status Section */}
+                        <div className="p-4 rounded-lg border bg-white shadow-sm">
+                            <h3 className="text-md font-bold text-gray-800 mb-2 border-b pb-2">Payment Verification</h3>
 
-                        {/* Approved */}
-                        {data.registrationStatus === "approved" && (
-                            <div className="text-green-600 font-semibold">
-                                ✅ Approved
-                                <p className="text-sm text-gray-500 mt-1">
-                                    Your registration is confirmed
-                                </p>
-                            </div>
-                        )}
+                            {data.registrationStatus === "pending" && (
+                                <div className="text-yellow-600 font-semibold flex flex-col">
+                                    <span>⏳ Pending</span>
+                                    <span className="text-sm text-gray-500 mt-1 font-normal">
+                                        Your payment is under verification.
+                                    </span>
+                                </div>
+                            )}
 
-                        {/* Rejected */}
-                        {data.registrationStatus === "rejected" && (
-                            <div className="text-red-600 font-semibold">
-                                ❌ Rejected
-                                <p className="text-sm text-gray-500 mt-1">
-                                    Reason: {data.reason || "No reason provided"}
-                                </p>
-                            </div>
-                        )}
+                            {(data.registrationStatus === "approved" || data.isRound2Selected) && (
+                                <div className="text-green-600 font-semibold flex flex-col">
+                                    <span>✅ Approved</span>
+                                    <span className="text-sm text-gray-500 mt-1 font-normal">
+                                        Your payment has been successfully verified.
+                                    </span>
+                                </div>
+                            )}
+
+                            {data.registrationStatus === "rejected" && (
+                                <div className="text-red-600 font-semibold flex flex-col">
+                                    <span>❌ Rejected</span>
+                                    <span className="text-sm text-gray-500 mt-1 font-normal">
+                                        Reason: {data.reason || "Payment or registration rejected"}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
 
                     </div>
                 )}

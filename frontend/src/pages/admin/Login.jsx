@@ -8,13 +8,13 @@ export default function Login() {
     const [form, setForm] = useState({ email: "", password: "" });
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { loading, error, token } = useSelector((state) => state.auth);
+    const { loading, error, token, user } = useSelector((state) => state.auth);
 
     useEffect(() => {
-        if (token) {
+        if (token && user?.role && user?.role !== "judge") {
             navigate("/admin/dashboard");
         }
-    }, [token, navigate]);
+    }, [token, user, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +22,12 @@ export default function Login() {
 
         const res = await dispatch(adminLogin(form));
         if (res.meta.requestStatus === "fulfilled") {
-            navigate("/admin/dashboard");
+            const loggedInUser = res.payload.user;
+            if (loggedInUser.role === "judge") {
+                navigate("/judge/dashboard");
+            } else {
+                navigate("/admin/dashboard");
+            }
         }
     };
 

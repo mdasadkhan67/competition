@@ -78,7 +78,33 @@ const registrationSchema = new mongoose.Schema({
         default: 'pending'
     },
 
-    reason: String
+    scores: [
+        {
+            judgeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin' },
+            judgeName: String,
+            cat1: { type: Number, min: 0, max: 10, default: 0 },
+            cat2: { type: Number, min: 0, max: 10, default: 0 },
+            cat3: { type: Number, min: 0, max: 10, default: 0 },
+            cat4: { type: Number, min: 0, max: 10, default: 0 },
+            cat5: { type: Number, min: 0, max: 10, default: 0 },
+            totalScore: { type: Number, min: 0, max: 50, default: 0 },
+            comments: String
+        }
+    ],
+
+    isRound2Selected: {
+        type: Boolean,
+        default: false
+    },
+    isRound1Rejected: {
+        type: Boolean,
+        default: false
+    },
+    reason: String,
+    finalRoundNaat: {
+        type: String,
+        default: ""
+    }
 
 }, { timestamps: true });
 

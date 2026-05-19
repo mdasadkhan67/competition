@@ -15,7 +15,7 @@ const authMiddleware = (req, res, next) => {
 
         const decoded = jwt.verify(token, SECRET);
 
-        req.admin = decoded;
+        req.user = decoded; // Renamed from req.admin to be generic
 
         next();
 
@@ -27,4 +27,16 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-module.exports = authMiddleware;
+const checkRole = (roles) => {
+    return (req, res, next) => {
+        if (!req.user || !roles.includes(req.user.role)) {
+            return res.status(403).json({
+                success: false,
+                message: "Access denied: Unauthorized role"
+            });
+        }
+        next();
+    };
+};
+
+module.exports = { authMiddleware, checkRole };

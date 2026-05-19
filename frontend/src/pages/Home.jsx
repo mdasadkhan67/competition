@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Stepper from "../components/Stepper";
 import { getGroupAvailability } from "../api/config";
@@ -143,13 +144,28 @@ export default function Home() {
                         </svg>
                         Refresh Status
                     </button>
+
+                    <div className="mt-6 flex flex-col gap-3">
+                        <Link to="/check-status" className="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline transition-all">Check Payment Status</Link>
+                        <Link to="/check-round2" className="text-sm font-medium text-purple-600 hover:text-purple-800 hover:underline transition-all">Check Final Round Status</Link>
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-100 flex justify-center items-center py-10 px-4">
+        <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4">
+            
+            <div className="w-full max-w-2xl flex justify-between items-center mb-6 px-4">
+                <Link to="/check-status" className="px-4 py-2 bg-blue-100 text-blue-700 font-bold rounded-lg hover:bg-blue-200 transition">
+                    Check Payment Status
+                </Link>
+                <Link to="/check-round2" className="px-4 py-2 bg-purple-100 text-purple-700 font-bold rounded-lg hover:bg-purple-200 transition">
+                    Check Final Round
+                </Link>
+            </div>
+
             <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-2xl border border-gray-50">
 
                 {/* Stepper */}

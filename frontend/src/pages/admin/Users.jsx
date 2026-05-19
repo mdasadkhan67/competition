@@ -102,155 +102,150 @@ export default function Users() {
                         </thead>
 
                         <tbody className="divide-y divide-gray-100">
-                            {users.map((u) => (
-                                <tr
-                                    key={u._id}
-                                    className="hover:bg-blue-50/40 transition duration-300"
-                                >
-                                    {/* User */}
-                                    <td className="px-4 py-4">
-                                        <div className="flex items-start gap-3">
-                                            <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold shrink-0">
-                                                {u.name?.charAt(0).toUpperCase()}
+                            {users.map((u) => {
+                                const isFinal = u.isRound2Selected || u.registrationStatus === "rejected";
+                                return (
+                                    <tr
+                                        key={u._id}
+                                        className={`transition duration-300 ${isFinal ? "bg-gray-50/50 opacity-60 grayscale-[0.5]" : "hover:bg-blue-50/40"}`}
+                                    >
+                                        {/* User */}
+                                        <td className="px-4 py-4">
+                                            <div className="flex items-start gap-3">
+                                                <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold shrink-0">
+                                                    {u.name?.charAt(0).toUpperCase()}
+                                                </div>
+
+                                                <div className="min-w-0">
+                                                    <h3 className="font-semibold text-gray-900 break-words">
+                                                        {u.name}
+                                                    </h3>
+
+                                                    <p className="text-sm text-gray-500 break-all">
+                                                        {u.naatTitle}
+                                                    </p>
+
+                                                    <p className="text-xs text-blue-600 mt-1 break-all">
+                                                        {u.candidateRegId}
+                                                    </p>
+                                                </div>
                                             </div>
+                                        </td>
 
-                                            <div className="min-w-0">
-                                                <h3 className="font-semibold text-gray-900 break-words">
-                                                    {u.name}
-                                                </h3>
-
-                                                <p className="text-sm text-gray-500 break-all">
-                                                    {u.naatTitle}
-                                                </p>
-
-                                                <p className="text-xs text-blue-600 mt-1 break-all">
-                                                    {u.candidateRegId}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    {/* Phone */}
-                                    <td className="px-4 py-4">
-                                        <span className="text-sm font-medium text-gray-700 break-all">
-                                            {u.phone}
-                                        </span>
-                                    </td>
-
-                                    {/* Group */}
-                                    <td className="px-4 py-4">
-                                        <span className="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700">
-                                            {u.group}
-                                        </span>
-                                    </td>
-
-                                    {/* Amount */}
-                                    <td className="px-4 py-4">
-                                        <span className="font-bold text-green-600">
-                                            ₹ {u.payment.amount}
-                                        </span>
-                                    </td>
-
-                                    {/* Transaction */}
-                                    <td className="px-4 py-4">
-                                        <div className="text-sm text-gray-700 break-all max-w-[180px]">
-                                            {u.payment.transactionId}
-                                        </div>
-                                    </td>
-
-                                    {/* Screenshot */}
-                                    <td className="px-4 py-4">
-                                        {u.transactionProof ? (
-                                            <a
-                                                href={`http://localhost:5000/${u.transactionProof}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="group block w-fit"
-                                            >
-                                                <img
-                                                    src={`http://localhost:5000/${u.transactionProof}`}
-                                                    alt="Payment Proof"
-                                                    className="h-14 w-14 rounded-xl object-cover border shadow-md transition duration-300 group-hover:scale-110"
-                                                />
-                                            </a>
-                                        ) : (
-                                            <span className="text-gray-400 text-sm">
-                                                No Image
+                                        {/* Phone */}
+                                        <td className="px-4 py-4">
+                                            <span className="text-sm font-medium text-gray-700 break-all">
+                                                {u.phone}
                                             </span>
-                                        )}
-                                    </td>
+                                        </td>
 
-                                    {/* Status */}
-                                    <td className="px-4 py-4">
-                                        <span
-                                            className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+                                        {/* Group */}
+                                        <td className="px-4 py-4">
+                                            <span className="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700">
+                                                {u.group}
+                                            </span>
+                                        </td>
+
+                                        {/* Amount */}
+                                        <td className="px-4 py-4">
+                                            <span className="font-bold text-green-600">
+                                                ₹ {u.payment.amount}
+                                            </span>
+                                        </td>
+
+                                        {/* Transaction */}
+                                        <td className="px-4 py-4">
+                                            <div className="text-sm text-gray-700 break-all max-w-[180px]">
+                                                {u.payment.transactionId}
+                                            </div>
+                                        </td>
+
+                                        {/* Screenshot */}
+                                        <td className="px-4 py-4">
+                                            {u.transactionProof ? (
+                                                <a
+                                                    href={`http://localhost:5000/${u.transactionProof}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="group block w-fit"
+                                                >
+                                                    <img
+                                                        src={`http://localhost:5000/${u.transactionProof}`}
+                                                        alt="Payment Proof"
+                                                        className="h-14 w-14 rounded-xl object-cover border shadow-md transition duration-300 group-hover:scale-110"
+                                                    />
+                                                </a>
+                                            ) : (
+                                                <span className="text-gray-400 text-sm">
+                                                    No Image
+                                                </span>
+                                            )}
+                                        </td>
+
+                                        {/* Status */}
+                                        <td className="px-4 py-4">
+                                            <span
+                                                className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
                                     
                                     ${u.payment?.status === "approved"
-                                                    ? "bg-green-100 text-green-700"
-                                                    : u.payment?.status === "rejected"
-                                                        ? "bg-red-100 text-red-700"
-                                                        : "bg-yellow-100 text-yellow-700"
-                                                }`}
-                                        >
-                                            {u.payment?.status || "pending"}
-                                        </span>
-                                    </td>
-
-                                    {/* Actions */}
-                                    <td className="px-4 py-4">
-                                        <div className="flex justify-end gap-2">
-
-                                            {/* Approve */}
-                                            <button
-                                                onClick={() =>
-                                                    handleUpdateStatus(u._id, "approved")
-                                                }
-                                                disabled={u.payment?.status === "approved"}
-                                                className={`p-2 rounded-lg transition duration-300
-
-                                                 ${u.payment?.status === "approved"
-                                                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                                                        : "bg-green-100 text-green-600 hover:bg-green-500 hover:text-white"
+                                                        ? "bg-green-100 text-green-700"
+                                                        : u.payment?.status === "rejected"
+                                                            ? "bg-red-100 text-red-700"
+                                                            : "bg-yellow-100 text-yellow-700"
                                                     }`}
                                             >
-                                                <FiCheck />
-                                            </button>
+                                                {u.payment?.status || "pending"}
+                                            </span>
+                                        </td>
 
-                                            {/* Reject */}
+                                        {/* Actions */}
+                                        <td className="px-4 py-4">
+                                            <div className="flex justify-end gap-2">
+                                                {/* Approve */}
+                                                <button
+                                                    onClick={() =>
+                                                        handleUpdateStatus(u._id, "approved")
+                                                    }
+                                                    disabled={u.payment?.status === "approved" || u.payment?.status === "rejected" || u.isRound2Selected || u.registrationStatus === "rejected"}
+                                                    className={`p-2 rounded-lg transition duration-300
+                                                 ${(u.payment?.status === "approved" || u.payment?.status === "rejected" || u.isRound2Selected || u.registrationStatus === "rejected")
+                                                            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                                                            : "bg-green-100 text-green-600 hover:bg-green-500 hover:text-white"
+                                                        }`}
+                                                >
+                                                    <FiCheck />
+                                                </button>
+
+                                                {/* Reject */}
+                                                <button
+                                                    onClick={() =>
+                                                        handleUpdateStatus(u._id, "rejected")
+                                                    }
+                                                    disabled={u.payment?.status === "approved" || u.payment?.status === "rejected" || u.isRound2Selected || u.registrationStatus === "rejected"}
+                                                    className={`p-2 rounded-lg transition duration-300
+                                                 ${(u.payment?.status === "approved" || u.payment?.status === "rejected" || u.isRound2Selected || u.registrationStatus === "rejected")
+                                                            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                                                            : "bg-red-100 text-red-600 hover:bg-red-500 hover:text-white"
+                                                        }`}
+                                                >
+                                                    <FiX />
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {/* Delete Registration */}
                                             <button
-                                                onClick={() =>
-                                                    handleUpdateStatus(u._id, "rejected")
-                                                }
-                                                disabled={u.payment?.status === "rejected"}
-                                                className={`p-2 rounded-lg transition duration-300
-
-                                                 ${u.payment?.status === "rejected"
-                                                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                                                        : "bg-red-100 text-red-600 hover:bg-red-500 hover:text-white"
-                                                    }`}
+                                                onClick={() => handleDeleteUser(u._id)}
+                                                className="flex items-center gap-2 px-3 py-2 rounded-lg transition duration-300 font-medium shadow-sm bg-red-100 text-red-600 hover:bg-red-500 hover:text-white"
                                             >
-                                                <FiX />
+                                                <FiTrash2 className="text-sm" />
+                                                Delete
                                             </button>
+                                        </td>
 
-
-
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {/* Delete Registration */}
-                                        <button
-                                            onClick={() => handleDeleteUser(u._id)}
-                                            className="flex items-center gap-2 px-3 py-2 rounded-lg 
-    bg-red-100 text-red-600 hover:bg-red-500 hover:text-white 
-    transition duration-300 font-medium shadow-sm"
-                                        >
-                                            <FiTrash2 className="text-sm" />
-                                            Delete
-                                        </button>
-                                    </td>
-
-                                </tr>
-                            ))}
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>
@@ -357,37 +352,44 @@ export default function Users() {
                             )}
 
                             {/* Buttons */}
-                            <div className="flex gap-3 mt-5">
-                                <button
-                                    onClick={() =>
-                                        handleUpdateStatus(u._id, "approved")
-                                    }
-                                    disabled={u.payment?.status === "approved"}
-                                    className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl font-semibold transition
-                            
-                            ${u.payment?.status === "approved"
-                                            ? "bg-gray-100 text-gray-400"
-                                            : "bg-green-500 text-white hover:bg-green-600"
-                                        }`}
-                                >
-                                    <FiCheck />
-                                    Approve
-                                </button>
+                            <div className="flex flex-col gap-3 mt-5">
+                                <div className="flex gap-3">
+                                    <button
+                                        onClick={() =>
+                                            handleUpdateStatus(u._id, "approved")
+                                        }
+                                        disabled={u.payment?.status === "approved" || u.payment?.status === "rejected" || u.isRound2Selected || u.registrationStatus === "rejected"}
+                                        className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl font-semibold transition
+                                        ${(u.payment?.status === "approved" || u.payment?.status === "rejected" || u.isRound2Selected || u.registrationStatus === "rejected")
+                                                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                                                : "bg-green-500 text-white hover:bg-green-600 shadow-md"
+                                            }`}
+                                    >
+                                        <FiCheck />
+                                        Approve
+                                    </button>
 
+                                    <button
+                                        onClick={() =>
+                                            handleUpdateStatus(u._id, "rejected")
+                                        }
+                                        disabled={u.payment?.status === "approved" || u.payment?.status === "rejected" || u.isRound2Selected || u.registrationStatus === "rejected"}
+                                        className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl font-semibold transition
+                                        ${(u.payment?.status === "approved" || u.payment?.status === "rejected" || u.isRound2Selected || u.registrationStatus === "rejected")
+                                                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                                                : "bg-red-500 text-white hover:bg-red-600 shadow-md"
+                                            }`}
+                                    >
+                                        <FiX />
+                                        Reject
+                                    </button>
+                                </div>
                                 <button
-                                    onClick={() =>
-                                        handleUpdateStatus(u._id, "rejected")
-                                    }
-                                    disabled={u.payment?.status === "rejected"}
-                                    className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl font-semibold transition
-                            
-                            ${u.payment?.status === "rejected"
-                                            ? "bg-gray-100 text-gray-400"
-                                            : "bg-red-500 text-white hover:bg-red-600"
-                                        }`}
+                                    onClick={() => handleDeleteUser(u._id)}
+                                    className="w-full flex items-center justify-center gap-2 py-2 rounded-xl font-semibold transition bg-red-100 text-red-600 hover:bg-red-500 hover:text-white shadow-sm"
                                 >
-                                    <FiX />
-                                    Reject
+                                    <FiTrash2 />
+                                    Delete
                                 </button>
                             </div>
                         </div>

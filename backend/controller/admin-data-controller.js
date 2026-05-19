@@ -1,4 +1,4 @@
-const { getAllRegistrations, updatePaymentStatus, getStats, deleteRegistration } = require("../model/admin-data-model");
+const { getAllRegistrations, updatePaymentStatus, getStats, deleteRegistration, toggleRoundSelection, rejectRound1 } = require("../model/admin-data-model");
 
 const getAllRegistrationsController = async (req, res) => {
     const result = await getAllRegistrations(req.query);
@@ -43,9 +43,33 @@ const deleteRegistrationController = async (req, res) => {
     });
 };
 
+const toggleRoundSelectionController = async (req, res) => {
+    const { isSelected } = req.body;
+    const result = await toggleRoundSelection(req.params.id, isSelected);
+
+    return res.status(result.status).json({
+        success: result.status < 400,
+        message: result.message,
+        data: result.data || {}
+    });
+};
+
+const rejectRound1Controller = async (req, res) => {
+    const { reason } = req.body;
+    const result = await rejectRound1(req.params.id, reason);
+
+    return res.status(result.status).json({
+        success: result.status < 400,
+        message: result.message,
+        data: result.data || {}
+    });
+};
+
 module.exports = {
     getAllRegistrationsController,
     updateStatusController,
     getStatsController,
-    deleteRegistrationController
+    deleteRegistrationController,
+    toggleRoundSelectionController,
+    rejectRound1Controller
 };

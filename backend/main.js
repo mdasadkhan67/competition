@@ -17,10 +17,11 @@ if (!mongoUri) {
 
 mongoose.connect(mongoUri)
     .then(() => {
-        console.log("MongoDB Connected");
+        console.log("MongoDB Connected Successfully");
     })
     .catch((error) => {
-        console.error("MongoDB Connection Error:", error);
+        console.error("MongoDB Connection Error Details:");
+        console.error(error);
         process.exit(1);
     });
 

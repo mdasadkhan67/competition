@@ -91,6 +91,11 @@ const getStats = async () => {
             registrationStatus: "pending"
         });
 
+        const cleared = await Registration.countDocuments({
+            registrationStatus: "approved",
+            isRound2Selected: true
+        });
+
         return {
             status: 200,
             data: {
@@ -98,7 +103,8 @@ const getStats = async () => {
                 jr,
                 middle,
                 sr,
-                pending
+                pending,
+                cleared
             }
         };
 
@@ -130,9 +136,67 @@ const deleteRegistration = async (id) => {
     }
 };
 
+const toggleRoundSelection = async (id, isSelected) => {
+    try {
+        const data = await Registration.findByIdAndUpdate(
+            id,
+            { isRound2Selected: isSelected },
+            { new: true }
+        );
+
+        if (!data) {
+            return {
+                status: 404,
+                message: "Registration not found"
+            };
+        }
+
+        return {
+            status: 200,
+            message: `Candidate ${isSelected ? "selected for" : "removed from"} Round 2`,
+            data
+        };
+    } catch (error) {
+        return {
+            status: 500,
+            message: error.message
+        };
+    }
+};
+
+const rejectRound1 = async (id, reason) => {
+    try {
+        const data = await Registration.findByIdAndUpdate(
+            id,
+            { isRound1Rejected: true, reason: reason || "" },
+            { new: true }
+        );
+
+        if (!data) {
+            return {
+                status: 404,
+                message: "Registration not found"
+            };
+        }
+
+        return {
+            status: 200,
+            message: "Candidate rejected from Round 1",
+            data
+        };
+    } catch (error) {
+        return {
+            status: 500,
+            message: error.message
+        };
+    }
+};
+
 module.exports = {
     getAllRegistrations,
     updatePaymentStatus,
     getStats,
-    deleteRegistration
+    deleteRegistration,
+    toggleRoundSelection,
+    rejectRound1
 };
