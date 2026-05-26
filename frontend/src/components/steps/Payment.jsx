@@ -56,27 +56,30 @@ export default function Payment({ form, handleChange, handleFile, submit, prev, 
     };
 
     return (
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 max-w-lg mx-auto">
+        <div className="w-full font-sans">
 
             {/* Header */}
-            <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-800">
-                    Payment
+            <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-800 font-display">
+                    Payment Verification
                 </h2>
-                <p className="text-sm text-gray-500 mt-1">
-                    Scan QR and complete payment
+                <p className="text-xs text-gray-400 mt-1 font-medium">
+                    Scan the QR code and upload payment screenshot
                 </p>
             </div>
 
             {/* QR Code */}
-            <div className="flex flex-col items-center mb-6">
+            <div className="flex flex-col items-center mb-8 bg-brand-light/10 border border-brand-mint/20 rounded-2xl p-4">
                 <img
                     src="/qr.png"
                     alt="QR Code"
-                    className="w-40 h-40 object-contain border p-2 rounded-lg"
+                    className="w-40 h-40 object-contain border border-brand-mint/30 p-2 bg-white rounded-xl shadow-xs"
                 />
-                <p className="text-sm text-gray-500 mt-2">
-                    Scan & Pay using any UPI app
+                <p className="text-xs text-brand-dark font-bold mt-3">
+                    Scan & Pay using any UPI App
+                </p>
+                <p className="text-[10px] text-gray-500 font-semibold mt-1">
+                    Beneficiary: Hera Islamic Channel
                 </p>
             </div>
 
@@ -85,28 +88,28 @@ export default function Payment({ form, handleChange, handleFile, submit, prev, 
 
                 {/* Payment Amount */}
                 <div>
-                    <label className="label">Payment Amount</label>
+                    <label className="label">Payment Amount (INR)</label>
                     <div className="inputBox">
                         <span>💳</span>
                         <input
                             name="amount"
                             value={form.amount || ""}
                             onChange={handleChange}
-                            placeholder="Enter Amount"
+                            placeholder="Enter Amount (e.g. 200)"
                         />
                     </div>
                 </div>
 
                 {/* Transaction ID */}
                 <div>
-                    <label className="label">Transaction ID</label>
+                    <label className="label">Transaction ID / UTR</label>
                     <div className="inputBox">
-                        <span>💳</span>
+                        <span>🏷️</span>
                         <input
                             name="transactionId"
                             value={form.transactionId || ""}
                             onChange={handleChange}
-                            placeholder="Enter transaction ID"
+                            placeholder="Enter 12-digit UPI Transaction Ref"
                         />
                     </div>
                 </div>
@@ -114,20 +117,31 @@ export default function Payment({ form, handleChange, handleFile, submit, prev, 
                 {/* Upload Screenshot */}
                 <div>
                     <label className="label">Upload Payment Screenshot</label>
-                    <div className="uploadBox">
+                    <label className="uploadBox flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-200 hover:border-brand-primary rounded-2xl p-6 bg-white hover:bg-brand-light/10 transition-all duration-300 cursor-pointer">
                         <input
                             type="file"
                             accept="image/*"
                             onChange={handleLocalFile}
+                            className="hidden"
                         />
-                    </div>
+                        <span className="text-3xl">📸</span>
+                        <span className="text-sm font-bold text-gray-700">Select Screenshot</span>
+                        <span className="text-xs text-gray-400">Image format (Max 5MB)</span>
+                    </label>
 
                     {/* Preview */}
                     {file && (
-                        <img
-                            src={URL.createObjectURL(file)}
-                            className="mt-2 w-28 h-28 object-cover rounded-lg"
-                        />
+                        <div className="mt-3 flex items-center gap-4 p-3 bg-brand-light/20 border border-brand-mint/20 rounded-xl animate-fade">
+                            <img
+                                src={URL.createObjectURL(file)}
+                                className="w-16 h-16 object-cover rounded-lg border border-brand-mint"
+                                alt="Preview"
+                            />
+                            <div className="flex flex-col">
+                                <span className="text-xs text-brand-dark font-bold truncate max-w-[200px]">{file.name}</span>
+                                <span className="text-[10px] text-gray-500">{(file.size / (1024 * 1024)).toFixed(2)} MB • Ready</span>
+                            </div>
+                        </div>
                     )}
                 </div>
 
@@ -135,23 +149,23 @@ export default function Payment({ form, handleChange, handleFile, submit, prev, 
 
             {/* Error */}
             {error && (
-                <p className="text-red-500 text-sm mt-4 text-center">
+                <p className="text-red-500 text-sm mt-5 text-center font-semibold">
                     {error}
                 </p>
             )}
 
             {/* Buttons */}
-            <div className="flex justify-between mt-8">
+            <div className="flex justify-between mt-10">
                 <button
                     onClick={prev}
-                    className="px-5 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                    className="px-6 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold transition-all"
                 >
                     ← Back
                 </button>
 
                 <button
                     onClick={handleSubmit}
-                    className="px-6 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition shadow"
+                    className="px-6 py-2.5 rounded-xl bg-brand-primary text-white hover:bg-emerald-600 font-bold transition-all shadow-md shadow-brand-primary/10"
                 >
                     Submit ✔
                 </button>

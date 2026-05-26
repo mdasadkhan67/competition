@@ -40,14 +40,14 @@ export default function Personal({ form, handleChange, next, prev }) {
     };
 
     return (
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 max-w-lg mx-auto">
+        <div className="w-full font-sans">
 
             {/* Header */}
-            <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-800">
+            <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-800 font-display">
                     Personal Information
                 </h2>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-xs text-gray-400 mt-1 font-medium">
                     Enter your basic details carefully
                 </p>
             </div>
@@ -107,6 +107,7 @@ export default function Personal({ form, handleChange, next, prev }) {
                             type="date"
                             value={form.dob || ""}
                             onChange={handleChange}
+                            className="cursor-pointer"
                         />
                     </div>
                 </div>
@@ -114,23 +115,23 @@ export default function Personal({ form, handleChange, next, prev }) {
 
             {/* Error */}
             {error && (
-                <p className="text-red-500 text-sm mt-4 text-center">
+                <p className="text-red-500 text-sm mt-4 text-center font-semibold">
                     {error}
                 </p>
             )}
 
             {/* Buttons */}
-            <div className="flex justify-between mt-8">
+            <div className="flex justify-between mt-10">
                 <button
                     onClick={prev}
-                    className="px-5 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                    className="px-6 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold transition-all"
                 >
                     ← Back
                 </button>
 
                 <button
                     onClick={handleNext}
-                    className="px-6 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition shadow"
+                    className="px-6 py-2.5 rounded-xl bg-brand-primary text-white hover:bg-emerald-600 font-bold transition-all shadow-md shadow-brand-primary/10"
                 >
                     Next →
                 </button>

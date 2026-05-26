@@ -47,14 +47,23 @@ export default function AdminLayout() {
     return (
         <div className="flex h-screen bg-gray-50 font-sans">
             {/* Sidebar */}
-            <div className="w-64 bg-gray-900 text-white flex flex-col shadow-2xl">
-                <div className="p-6 border-b border-gray-800 flex items-center justify-center">
-                    <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                        AdminPro
-                    </h2>
+            <div className="w-64 bg-brand-dark text-white flex flex-col shadow-2xl border-r border-brand-mint/10">
+                
+                {/* Sidebar Header */}
+                <div className="p-6 border-b border-white/5 flex items-center gap-3">
+                    <img src="/logo.svg" alt="SDI Logo" className="w-10 h-10 bg-white rounded-full p-0.5 border border-brand-gold" />
+                    <div className="flex flex-col">
+                        <span className="text-white font-extrabold text-base tracking-tight font-display">
+                            SDI Admin
+                        </span>
+                        <span className="text-brand-mint font-bold text-[9px] uppercase tracking-wider mt-0.5">
+                            Management Portal
+                        </span>
+                    </div>
                 </div>
 
-                <div className="flex-1 py-6 px-4 space-y-2">
+                {/* Navigation Items */}
+                <div className="flex-1 py-6 px-4 space-y-1.5 overflow-y-auto">
                     {navItems.map((item) => {
                         const isActive = location.pathname === item.path;
                         return (
@@ -62,30 +71,31 @@ export default function AdminLayout() {
                                 key={item.name}
                                 to={item.path}
                                 className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${isActive
-                                    ? "bg-blue-600 text-white shadow-lg"
-                                    : "text-gray-400 hover:bg-gray-800 hover:text-white"
+                                    ? "bg-brand-primary/20 text-brand-mint border-l-4 border-brand-gold font-bold shadow-inner"
+                                    : "text-gray-400 hover:bg-white/5 hover:text-white"
                                     }`}
                             >
                                 {item.icon}
-                                <span className="font-medium">{item.name}</span>
+                                <span className="font-semibold text-xs sm:text-sm">{item.name}</span>
                             </Link>
                         );
                     })}
                 </div>
 
-                <div className="p-4 border-t border-gray-800">
+                {/* Sidebar Footer / Logout */}
+                <div className="p-4 border-t border-white/5">
                     <button
                         onClick={handleLogout}
-                        className="flex w-full items-center space-x-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-red-500/10 hover:text-red-500 transition-all duration-200"
+                        className="flex w-full items-center space-x-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-all duration-200 cursor-pointer"
                     >
                         <FiLogOut className="text-xl" />
-                        <span className="font-medium">Logout</span>
+                        <span className="font-bold text-xs sm:text-sm">Logout</span>
                     </button>
                 </div>
             </div>
 
             {/* Content Area */}
-            <div className="flex-1 overflow-auto bg-gray-50">
+            <div className="flex-1 overflow-auto bg-gray-50/50">
                 <div className="p-8">
                     <Outlet />
                 </div>

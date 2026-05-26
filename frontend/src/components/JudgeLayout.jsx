@@ -38,13 +38,23 @@ export default function JudgeLayout() {
     return (
         <div className="flex h-screen bg-gray-50 font-sans">
             {/* Sidebar */}
-            <div className="w-64 bg-indigo-900 text-white flex flex-col shadow-2xl">
-                <div className="p-6 border-b border-indigo-800 flex flex-col items-center justify-center">
-                    <h2 className="text-2xl font-bold text-white">JudgePortal</h2>
-                    <p className="text-indigo-300 text-xs mt-1 uppercase tracking-widest font-bold">Naat Competition</p>
+            <div className="w-64 bg-brand-dark text-white flex flex-col shadow-2xl border-r border-brand-mint/10">
+                
+                {/* Sidebar Header */}
+                <div className="p-6 border-b border-white/5 flex items-center gap-3">
+                    <img src="/logo.svg" alt="SDI Logo" className="w-10 h-10 bg-white rounded-full p-0.5 border border-brand-gold" />
+                    <div className="flex flex-col">
+                        <span className="text-white font-extrabold text-base tracking-tight font-display">
+                            SDI Judge
+                        </span>
+                        <span className="text-brand-mint font-bold text-[9px] uppercase tracking-wider mt-0.5">
+                            Evaluation Portal
+                        </span>
+                    </div>
                 </div>
 
-                <div className="flex-1 py-6 px-4 space-y-2">
+                {/* Navigation Items */}
+                <div className="flex-1 py-6 px-4 space-y-1.5 overflow-y-auto">
                     {navItems.map((item) => {
                         const isActive = location.pathname === item.path || location.pathname.startsWith(item.path + "/");
                         return (
@@ -52,34 +62,35 @@ export default function JudgeLayout() {
                                 key={item.name}
                                 to={item.path}
                                 className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${isActive
-                                    ? "bg-white/10 text-white shadow-lg border border-white/10 backdrop-blur-md"
-                                    : "text-indigo-200 hover:bg-white/5 hover:text-white"
+                                    ? "bg-brand-primary/20 text-brand-mint border-l-4 border-brand-gold font-bold shadow-inner"
+                                    : "text-gray-400 hover:bg-white/5 hover:text-white"
                                     }`}
                             >
                                 {item.icon}
-                                <span className="font-medium">{item.name}</span>
+                                <span className="font-semibold text-xs sm:text-sm">{item.name}</span>
                             </Link>
                         );
                     })}
                 </div>
 
-                <div className="p-4 border-t border-indigo-800">
-                    <div className="mb-4 px-4">
-                        <p className="text-xs text-indigo-400 uppercase font-bold">Logged in as</p>
-                        <p className="text-sm font-medium truncate">{user?.name}</p>
+                {/* Sidebar Footer / User and Logout */}
+                <div className="p-4 border-t border-white/5">
+                    <div className="mb-4 px-4 font-semibold text-xs text-gray-400">
+                        <p className="text-[10px] text-brand-mint font-bold uppercase tracking-wider">Logged in as</p>
+                        <p className="text-sm font-extrabold text-white mt-1 truncate">{user?.name}</p>
                     </div>
                     <button
                         onClick={handleLogout}
-                        className="flex w-full items-center space-x-3 px-4 py-3 rounded-xl text-indigo-300 hover:bg-red-500/20 hover:text-red-400 transition-all duration-200"
+                        className="flex w-full items-center space-x-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-all duration-200 cursor-pointer"
                     >
                         <FiLogOut className="text-xl" />
-                        <span className="font-medium">Logout</span>
+                        <span className="font-bold text-xs sm:text-sm">Logout</span>
                     </button>
                 </div>
             </div>
 
             {/* Content Area */}
-            <div className="flex-1 overflow-auto bg-gray-50">
+            <div className="flex-1 overflow-auto bg-gray-50/50">
                 <div className="p-8">
                     <Outlet />
                 </div>

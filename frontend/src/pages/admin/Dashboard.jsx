@@ -33,36 +33,42 @@ export default function Dashboard() {
     };
 
     const colorMap = [
-        "from-blue-500 to-cyan-400",
-        "from-purple-500 to-pink-500",
-        "from-orange-500 to-yellow-400",
-        "from-emerald-500 to-teal-400",
+        "from-brand-dark to-brand-primary",
+        "from-brand-primary to-brand-mint",
+        "from-brand-gold to-brand-gold-light",
+        "from-[#044e43] to-emerald-400",
     ];
 
 
     return (
-        <div>
+        <div className="font-sans">
             <div className="mb-8">
                 {user?.role === "judge" ? (
-                    <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-8 text-white shadow-xl shadow-blue-500/20">
-                        <h1 className="text-4xl font-extrabold mb-2">Welcome to Naat Competition</h1>
-                        <p className="text-blue-100 text-lg opacity-90">Honorable Judge, <span className="font-bold underline decoration-blue-300 underline-offset-4">{user.name}</span></p>
-                        <p className="mt-4 text-sm bg-white/10 w-fit px-4 py-2 rounded-full backdrop-blur-sm">Evaluation Portal Active</p>
+                    <div className="bg-gradient-to-r from-brand-dark to-[#054e42] border border-brand-mint/20 rounded-3xl p-8 text-white shadow-xl soft-glow-emerald relative overflow-hidden animate-fade-in-up">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-[120px] pointer-events-none"></div>
+                        <h1 className="text-4xl font-extrabold mb-2 font-display">Welcome to Naat Competition</h1>
+                        <p className="text-brand-mint text-lg opacity-95">Honorable Judge, <span className="font-bold underline decoration-brand-gold underline-offset-4">{user.name}</span></p>
+                        <p className="mt-4 text-xs font-bold bg-white/10 text-brand-mint border border-white/10 w-fit px-4 py-2 rounded-full backdrop-blur-sm tracking-wide uppercase">Evaluation Portal Active</p>
                     </div>
                 ) : (
-                    <h1 className="text-3xl font-bold text-gray-800">Dashboard Overview</h1>
+                    <div className="bg-gradient-to-r from-brand-dark to-[#054e42] border border-brand-mint/20 rounded-3xl p-8 text-white shadow-xl soft-glow-emerald relative overflow-hidden animate-fade-in-up">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-[120px] pointer-events-none"></div>
+                        <h1 className="text-4xl font-extrabold mb-2 font-display">Welcome to SDI Admin</h1>
+                        <p className="text-brand-mint text-lg opacity-95">Systems Administrator, <span className="font-bold underline decoration-brand-gold underline-offset-4">{user?.name || "Officer"}</span></p>
+                        <p className="mt-4 text-xs font-bold bg-white/10 text-brand-mint border border-white/10 w-fit px-4 py-2 rounded-full backdrop-blur-sm tracking-wide uppercase">Naat Portal Controller</p>
+                    </div>
                 )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-sans">
                 {Object.entries(stats || {}).map(([key, value], index) => {
                     const gradient = colorMap[index % colorMap.length];
                     return (
-                        <div key={key} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                        <div key={key} className="bg-white rounded-2xl shadow-sm border border-gray-150 overflow-hidden hover:shadow-lg transition-all duration-300">
                             <div className={`h-2 w-full bg-gradient-to-r ${gradient}`}></div>
                             <div className="p-6">
-                                <p className="text-sm font-medium text-gray-500 mb-1">{formatKey(key)}</p>
-                                <h2 className="text-4xl font-extrabold text-gray-900">{value}</h2>
+                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">{formatKey(key)}</p>
+                                <h2 className="text-4xl font-black text-brand-dark font-display">{value}</h2>
                             </div>
                         </div>
                     );

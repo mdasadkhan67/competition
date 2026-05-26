@@ -1,53 +1,147 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Outfit", sans-serif;
+
+  --color-brand-dark: #032520;
+  --color-brand-dark-hover: #021a16;
+  --color-brand-primary: #10b981;
+  --color-brand-mint: #34d399;
+  --color-brand-light: #ecfdf5;
+  --color-brand-gold: #d97706;
+  --color-brand-gold-light: #fbbf24;
+  --color-brand-gold-hover: #b45309;
+
+  --animate-fade-in-up: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
+    }
+    50% {
+      opacity: .8;
+      box-shadow: 0 0 25px rgba(251, 191, 36, 0.6);
+    }
+  }
+}
+
+/* Global Font Settings */
+body {
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+/* Custom Components & Utilities */
 .label {
-    @apply text-sm font-medium text-gray-600 mb-1 block;
+  @apply text-sm font-semibold text-gray-700 mb-1.5 block tracking-wide;
 }
 
 .inputBox {
-    @apply flex items-center gap-2 border rounded-lg px-3 py-2 bg-gray-50 focus-within:ring-2 focus-within:ring-blue-500 transition;
+  @apply flex items-center gap-3 border border-gray-200 rounded-2xl px-4 py-3 bg-white focus-within:ring-2 focus-within:ring-brand-mint/50 focus-within:border-brand-primary transition-all duration-300 shadow-xs;
 }
 
 .inputBox span {
-    @apply text-gray-400;
+  @apply text-gray-400 text-lg;
 }
 
-.inputBox input {
-    @apply w-full bg-transparent outline-none text-sm;
+.inputBox input, .inputBox select, .inputBox textarea {
+  @apply w-full bg-transparent outline-none text-sm text-gray-800 placeholder-gray-400 font-medium;
 }
 
 .uploadBox {
-    @apply border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 transition cursor-pointer bg-gray-50;
+  @apply border-2 border-dashed border-gray-200 rounded-2xl p-6 text-center hover:border-brand-primary hover:bg-brand-light/20 transition-all duration-300 cursor-pointer bg-white shadow-xs;
 }
 
 .uploadBox input {
-    @apply w-full cursor-pointer;
+  @apply w-full cursor-pointer hidden;
 }
 
-.label {
-    @apply text-sm font-medium text-gray-600 mb-1 block;
+/* Premium Card Styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(3, 37, 32, 0.06),
+              0 1px 3px -1px rgba(3, 37, 32, 0.04);
 }
 
-.inputBox {
-    @apply flex items-center gap-2 border rounded-lg px-3 py-2 bg-gray-50 focus-within:ring-2 focus-within:ring-green-500 transition;
+.dark-glass-card {
+  background: rgba(3, 37, 32, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(52, 211, 153, 0.15);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
 }
 
-.uploadBox {
-    @apply border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-green-500 transition cursor-pointer bg-gray-50;
+.premium-gradient-bg {
+  background: linear-gradient(135deg, #032520 0%, #064e43 50%, #032520 100%);
+}
+
+.soft-glow-emerald {
+  box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.15);
+}
+
+.soft-glow-gold {
+  box-shadow: 0 0 40px -10px rgba(217, 119, 6, 0.15);
+}
+
+/* Custom Scrollbar for modern feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 @keyframes fade {
-    from {
-        opacity: 0;
-        transform: translateY(-6px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade {
-    animation: fade 0.25s ease-in-out;
+  animation: fade 0.25s ease-in-out;
 }

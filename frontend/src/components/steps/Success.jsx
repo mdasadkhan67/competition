@@ -18,34 +18,34 @@ export default function Success({ result }) {
     };
 
     return (
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 max-w-lg mx-auto text-center">
+        <div className="w-full font-sans text-center">
 
             {/* Success Icon */}
-            <div className="text-5xl mb-3 animate-pulse">🎉</div>
+            <div className="text-6xl mb-4 animate-bounce">🎉</div>
 
             {/* Title */}
-            <h2 className="text-2xl font-bold text-green-600">
+            <h2 className="text-3xl font-extrabold text-brand-primary font-display">
                 Registration Successful!
             </h2>
 
             {/* Message */}
-            <p className="text-gray-600 mt-3 text-sm leading-relaxed">
+            <p className="text-gray-600 mt-4 text-sm sm:text-base leading-relaxed font-medium">
                 Congratulations! Your registration has been submitted successfully.
                 <br />
-                <span className="font-semibold text-gray-800">
-                    Your registration is currently under review.
+                <span className="font-bold text-brand-dark bg-brand-light/30 px-3 py-1 rounded-full border border-brand-mint/10 inline-block mt-2">
+                    Status: Under Admin Review
                 </span>
-                <br />
-                Once your payment is verified, your registration will be approved.
+                <br className="mb-2" />
+                Once your payment is verified, your registration status will be updated.
             </p>
 
             {/* Registration ID */}
-            <div className="mt-6 bg-gray-100 rounded-xl p-4 border relative">
+            <div className="mt-8 bg-brand-light/10 border border-brand-mint/20 rounded-2xl p-6 relative">
 
-                <p className="text-sm text-gray-500">Your Registration ID</p>
+                <p className="text-xs text-gray-400 uppercase tracking-widest font-bold">Your Registration ID</p>
 
-                <div className="flex items-center justify-center gap-2 mt-2">
-                    <p className="text-lg font-bold text-blue-600 tracking-wide">
+                <div className="flex items-center justify-center gap-3 mt-3">
+                    <p className="text-2xl font-black text-brand-dark tracking-wider font-display">
                         {regId || "N/A"}
                     </p>
 
@@ -53,35 +53,32 @@ export default function Success({ result }) {
                     <button
                         onClick={handleCopy}
                         disabled={!regId}
-                        className="text-gray-500 hover:text-blue-600 transition"
+                        className="p-2 bg-white border border-gray-100 hover:border-brand-primary rounded-xl text-gray-400 hover:text-brand-primary shadow-xs transition cursor-pointer disabled:cursor-not-allowed"
                     >
-                        {copied ? <FiCheck className="text-green-600" /> : <FiCopy />}
+                        {copied ? <FiCheck className="text-brand-primary" /> : <FiCopy className="text-lg" />}
                     </button>
                 </div>
 
                 {/* Tooltip */}
                 {copied && (
-                    <div className="absolute -top-3 right-4 bg-green-600 text-white text-xs px-2 py-1 rounded shadow animate-fade">
-                        Copied!
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-primary text-white text-xs px-3 py-1 rounded-full shadow-md animate-fade font-bold">
+                        Copied to Clipboard!
                     </div>
                 )}
             </div>
 
             {/* Instructions */}
-            <div className="mt-5 text-sm text-gray-600 leading-relaxed">
-                <p>You can check your payment status using the link below.</p>
-                <p className="mt-2">
-                    Copy your <span className="font-semibold">Registration ID</span> and use it on the status page.
-                </p>
+            <div className="mt-6 text-sm text-gray-500 font-semibold leading-relaxed">
+                <p>Please save this Registration ID to check your status and sign in later.</p>
             </div>
 
             {/* Button */}
-            <div className="mt-6">
+            <div className="mt-8">
                 <Link
-                    to="/check-status"
-                    className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition shadow"
+                    to="/login"
+                    className="inline-block bg-gradient-to-r from-brand-primary to-brand-mint text-brand-dark font-extrabold px-8 py-3.5 rounded-2xl hover:scale-[1.03] active:scale-[0.98] transition-all shadow-md shadow-brand-primary/15 border border-brand-gold/20"
                 >
-                    Check Status
+                    Access Portal Login
                 </Link>
             </div>
 
