@@ -42,7 +42,7 @@ export default function Header() {
             className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
                 isScrolled 
                 ? "bg-brand-dark/95 backdrop-blur-md border-b border-brand-mint/20 shadow-lg" 
-                : "bg-transparent border-b border-transparent"
+                : "bg-brand-dark border-b border-brand-mint/10 shadow-md"
             }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -86,7 +86,7 @@ export default function Header() {
                             to="/login"
                             className="px-4 py-2 border border-brand-mint/30 hover:border-brand-mint text-brand-mint hover:text-white hover:bg-brand-mint/10 rounded-xl text-sm font-bold transition-all duration-200"
                         >
-                            Portal Login
+                            Admin Login
                         </Link>
                         <Link 
                             to="/register"
@@ -168,7 +168,7 @@ export default function Header() {
                             onClick={() => setIsOpen(false)}
                             className="flex items-center justify-center gap-2 w-full py-3 border border-brand-mint/30 hover:border-brand-mint text-brand-mint hover:text-white rounded-xl text-base font-bold transition-all duration-200"
                         >
-                            <FiUserCheck /> Portal Login
+                            <FiUserCheck /> Admin Login
                         </Link>
                         <Link 
                             to="/register"

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { FiAward, FiTrendingUp, FiSearch, FiTrophy, FiStar } from "react-icons/fi";
+import { FiAward, FiTrendingUp, FiSearch, FiStar } from "react-icons/fi";
+import { FaTrophy } from "react-icons/fa";
 
 export default function Leaderboard() {
     const [category, setCategory] = useState("All");
@@ -134,7 +135,7 @@ export default function Leaderboard() {
                                         <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center font-black text-2xl border-4 ${
                                             isFirst ? "bg-white/10 border-brand-gold" : "bg-brand-light/30 border-brand-mint"
                                         }`}>
-                                            {isFirst ? <FiTrophy className="text-brand-gold-light text-3xl" /> : cand.name[0]}
+                                            {isFirst ? <FaTrophy className="text-brand-gold-light text-3xl" /> : cand.name[0]}
                                         </div>
                                         <span className={`absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-black border ${rankBadge}`}>
                                             Rank {cand.displayRank}

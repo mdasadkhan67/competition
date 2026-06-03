@@ -102,12 +102,6 @@ export default function Home() {
                             >
                                 View Competition
                             </Link>
-                            <Link 
-                                to="/login"
-                                className="w-full sm:w-auto px-8 py-4 bg-transparent text-brand-mint hover:text-white font-bold text-center transition-all hover:underline"
-                            >
-                                Participant Login
-                            </Link>
                         </div>
                     </div>
 

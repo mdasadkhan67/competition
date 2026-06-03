@@ -11,19 +11,18 @@ const mongoUri = process.env.MONGO_URI;
 const PORT = process.env.PORT || 3000;
 
 if (!mongoUri) {
-    console.error("MONGO_URI is not defined in your .env file!");
-    process.exit(1);
+    console.warn("MONGO_URI is not defined in your .env file! Running without MongoDB connection.");
+} else {
+    mongoose.connect(mongoUri)
+        .then(() => {
+            console.log("MongoDB Connected Successfully");
+        })
+        .catch((error) => {
+            console.error("MongoDB Connection Error Details:");
+            console.error(error);
+            console.warn("Continuing server execution without MongoDB connection.");
+        });
 }
-
-mongoose.connect(mongoUri)
-    .then(() => {
-        console.log("MongoDB Connected Successfully");
-    })
-    .catch((error) => {
-        console.error("MongoDB Connection Error Details:");
-        console.error(error);
-        process.exit(1);
-    });
 
 
 app.use(cors());
