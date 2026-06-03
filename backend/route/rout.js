@@ -88,6 +88,13 @@ router.delete(
     adminDataController.deleteRegistrationController
 );
 
+router.delete(
+    "/admin/registrations/:id/scores/:judgeId",
+    authMiddleware,
+    checkRole(["superadmin", "admin"]),
+    adminDataController.deleteRegistrationScoreController
+);
+
 router.get(
     "/admin/registrations/stats",
     authMiddleware,

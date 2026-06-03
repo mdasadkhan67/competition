@@ -32,6 +32,8 @@ import AdminExport from "./pages/admin/Export";
 import AdminConfig from "./pages/admin/Config";
 import AdminJudgingView from "./pages/admin/AdminJudgingView";
 import AdminLyrics from "./pages/admin/AdminLyrics";
+import AdminLedDisplay from "./pages/admin/AdminLedDisplay";
+import AdminLedScreen from "./pages/admin/AdminLedScreen";
 
 // Judge Pages
 import JudgeDashboard from "./pages/judge/Dashboard";
@@ -66,6 +68,7 @@ export default function App() {
 
         {/* Admin Portal (Token Authenticated) */}
         <Route path="/admin/login" element={<Login />} />
+        <Route path="/admin/led-screen" element={<AdminLedScreen />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboard />} />
@@ -76,6 +79,7 @@ export default function App() {
           <Route path="export" element={<AdminExport />} />
           <Route path="config" element={<AdminConfig />} />
           <Route path="lyrics" element={<AdminLyrics />} />
+          <Route path="led-display" element={<AdminLedDisplay />} />
         </Route>
 
         {/* Judge Portal (Token Authenticated) */}

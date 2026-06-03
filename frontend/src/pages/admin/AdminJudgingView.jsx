@@ -48,6 +48,24 @@ export default function AdminJudgingView() {
         }
     };
 
+    const handleUnlockScore = async (registrationId, judgeId, judgeName, candidateName) => {
+        const confirmUnlock = window.confirm(
+            `Are you sure you want to unlock/reset ${judgeName}'s score for "${candidateName}"?\nThis will completely remove the score, allowing the judge to evaluate them again.`
+        );
+
+        if (confirmUnlock) {
+            try {
+                const jId = (judgeId?._id || judgeId)?.toString();
+                await API.delete(`/admin/registrations/${registrationId}/scores/${jId}`);
+                alert("Score unlocked successfully!");
+                fetchResults();
+            } catch (err) {
+                console.error("Failed to unlock score", err);
+                alert(err.response?.data?.message || "Failed to unlock score");
+            }
+        }
+    };
+
     useEffect(() => {
         fetchResults();
     }, [group]);
@@ -120,9 +138,17 @@ export default function AdminJudgingView() {
                                             </td>
                                             <td className="py-6">
                                                 <div className="flex items-center space-x-4">
-                                                    <div className="h-12 w-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-black">
-                                                        {p.name.charAt(0).toUpperCase()}
-                                                    </div>
+                                                    {p.photo ? (
+                                                        <img
+                                                            src={`http://localhost:5000/${p.photo}`}
+                                                            alt={p.name}
+                                                            className="h-12 w-12 rounded-2xl object-cover border border-gray-200 shadow-sm shrink-0"
+                                                        />
+                                                    ) : (
+                                                        <div className="h-12 w-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-black shrink-0">
+                                                            {p.name.charAt(0).toUpperCase()}
+                                                        </div>
+                                                    )}
                                                     <div>
                                                         <p className="font-black text-gray-800 leading-tight">{p.name}</p>
                                                         <p className="text-[10px] text-gray-400 font-bold uppercase mt-0.5">{p.candidateRegId}</p>
@@ -137,11 +163,12 @@ export default function AdminJudgingView() {
                                                             <div key={idx} className="flex flex-col items-center">
                                                                 <span className="text-[9px] text-gray-400 font-black uppercase mb-1">Judge {idx + 1}</span>
                                                                 <div
+                                                                    onClick={() => score && handleUnlockScore(p._id, score.judgeId, score.judgeName, p.name)}
                                                                     className={`w-12 h-10 rounded-xl border flex items-center justify-center font-black transition-all ${score
-                                                                        ? "bg-indigo-50 border-indigo-200 text-indigo-700 shadow-sm"
+                                                                        ? "bg-indigo-50 border-indigo-200 text-indigo-700 hover:bg-red-50 hover:border-red-200 hover:text-red-600 cursor-pointer shadow-sm"
                                                                         : "bg-gray-50 border-gray-100 text-gray-300"
                                                                         }`}
-                                                                    title={score ? `${score.judgeName} (${score.totalScore}/${SCORING.MAX_TOTAL_PER_JUDGE})` : "Pending"}
+                                                                    title={score ? `Click to Unlock/Reset ${score.judgeName}'s score` : "Pending"}
                                                                 >
                                                                     {score ? score.totalScore : "-"}
                                                                 </div>

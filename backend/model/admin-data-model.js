@@ -192,11 +192,40 @@ const rejectRound1 = async (id, reason) => {
     }
 };
 
+const deleteRegistrationScore = async (id, judgeId) => {
+    try {
+        const data = await Registration.findByIdAndUpdate(
+            id,
+            { $pull: { scores: { judgeId: judgeId } } },
+            { new: true }
+        );
+
+        if (!data) {
+            return {
+                status: 404,
+                message: "Registration not found"
+            };
+        }
+
+        return {
+            status: 200,
+            message: "Judge score removed successfully",
+            data
+        };
+    } catch (error) {
+        return {
+            status: 500,
+            message: error.message
+        };
+    }
+};
+
 module.exports = {
     getAllRegistrations,
     updatePaymentStatus,
     getStats,
     deleteRegistration,
     toggleRoundSelection,
-    rejectRound1
+    rejectRound1,
+    deleteRegistrationScore
 };

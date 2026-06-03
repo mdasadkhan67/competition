@@ -112,9 +112,17 @@ export default function Users() {
                                         {/* User */}
                                         <td className="px-4 py-4">
                                             <div className="flex items-start gap-3">
-                                                <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold shrink-0">
-                                                    {u.name?.charAt(0).toUpperCase()}
-                                                </div>
+                                                {u.photo ? (
+                                                    <img
+                                                        src={`http://localhost:5000/${u.photo}`}
+                                                        alt={u.name}
+                                                        className="h-10 w-10 rounded-full object-cover border border-gray-200 shrink-0 shadow-xs"
+                                                    />
+                                                ) : (
+                                                    <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold shrink-0 shadow-xs">
+                                                        {u.name?.charAt(0).toUpperCase()}
+                                                    </div>
+                                                )}
 
                                                 <div className="min-w-0">
                                                     <h3 className="font-semibold text-gray-900 break-words">

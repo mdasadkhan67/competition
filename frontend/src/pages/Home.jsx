@@ -56,7 +56,7 @@ export default function Home() {
 
     return (
         <div className="bg-gray-50 text-gray-800 overflow-x-hidden font-sans">
-            
+
             {/* ================= HERO SECTION ================= */}
             <section className="relative premium-gradient-bg py-24 md:py-32 px-4 sm:px-6 lg:px-8 text-white overflow-hidden soft-glow-emerald">
                 {/* Floating Islamic Geometry Background Art */}
@@ -69,34 +69,34 @@ export default function Home() {
                 </div>
 
                 <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    
+
                     {/* Hero Text */}
                     <div className="lg:col-span-7 space-y-6 text-center lg:text-left animate-fade-in-up">
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-brand-mint/20 backdrop-blur-md">
                             <span className="w-2 h-2 rounded-full bg-brand-mint animate-pulse-glow"></span>
                             <span className="text-xs sm:text-sm font-bold tracking-wider text-brand-mint uppercase font-display">Annual Event 2026</span>
                         </div>
-                        
+
                         <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1] font-display">
                             SDI Naat <br />
                             <span className="bg-gradient-to-r from-brand-mint via-brand-gold-light to-brand-primary bg-clip-text text-transparent">
                                 Competition Portal
                             </span>
                         </h1>
-                        
+
                         <p className="text-gray-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
                             Join the international arena of Naat recitation. Express your devotion, refine your recitation under the guidance of expert scholars, and qualify for honorable rankings.
                         </p>
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                            <Link 
+                            <Link
                                 to="/register"
                                 className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-primary to-brand-mint text-brand-dark font-black rounded-2xl shadow-xl shadow-brand-primary/20 hover:scale-[1.03] active:scale-[0.98] transition-all text-center flex items-center justify-center gap-2 border border-brand-gold-light/20"
                             >
                                 Register Now <FiArrowRight className="text-lg" />
                             </Link>
-                            <Link 
+                            <Link
                                 to="/categories"
                                 className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-2xl border border-white/10 hover:border-brand-mint/40 transition-all text-center"
                             >
@@ -109,7 +109,7 @@ export default function Home() {
                     <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
                         {/* Outer Glow ring */}
                         <div className="absolute w-72 h-72 sm:w-80 sm:h-80 bg-brand-primary/20 rounded-full blur-3xl -z-10"></div>
-                        
+
                         {/* Beautiful Circular Badge Container */}
                         <div className="w-64 h-64 sm:w-80 sm:h-80 bg-brand-dark/40 backdrop-blur-md rounded-full p-4 border border-brand-mint/30 shadow-2xl flex items-center justify-center animate-float">
                             <img src="/logo.svg" alt="Hera Islamic Logo" className="w-full h-full object-contain" />
@@ -161,7 +161,7 @@ export default function Home() {
             {/* ================= FEATURES SECTION ================= */}
             <section className="bg-white border-y border-gray-100 py-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto space-y-16">
-                    
+
                     {/* Header */}
                     <div className="text-center space-y-3 max-w-xl mx-auto">
                         <h2 className="text-xs font-black uppercase tracking-widest text-brand-primary">How It Works</h2>
@@ -193,7 +193,7 @@ export default function Home() {
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
                 <div className="bg-brand-dark rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl flex flex-col lg:flex-row items-center gap-10">
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-primary/20 via-transparent to-transparent"></div>
-                    
+
                     <div className="lg:w-1/2 space-y-6 relative z-10 text-center lg:text-left">
                         <span className="text-brand-gold font-bold text-xs uppercase tracking-widest font-display">Categories Available</span>
                         <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight font-display">Age Groups & Limits</h2>
@@ -201,7 +201,7 @@ export default function Home() {
                             To ensure fair evaluation, candidates are classified into distinct age categories. Each group is graded on specific criteria, with proportional time allocations.
                         </p>
                         <div className="pt-2">
-                            <Link 
+                            <Link
                                 to="/categories"
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary hover:bg-emerald-500 text-brand-dark font-extrabold rounded-xl transition-all shadow-md shadow-brand-primary/10 border border-brand-gold/20"
                             >
@@ -231,14 +231,14 @@ export default function Home() {
             {/* ================= RULES SUMMARY ================= */}
             <section className="bg-white py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-100">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    
+
                     <div className="lg:col-span-5 space-y-6">
                         <span className="text-brand-primary font-bold text-xs uppercase tracking-widest">Crucial Guidelines</span>
                         <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-dark tracking-tight font-display">Rules & Evaluation Criteria</h2>
                         <p className="text-gray-500 text-sm sm:text-base leading-relaxed font-semibold">
                             To maintain the high standards of our competition, we enforce strict recording and submission guidelines. Ensure you meet all points before uploading your recitation.
                         </p>
-                        
+
                         <div className="space-y-3.5">
                             {[
                                 "No background sound effects or reverb filters",
@@ -263,7 +263,7 @@ export default function Home() {
                     {/* Graphic Box */}
                     <div className="lg:col-span-7 bg-brand-light/35 border border-brand-mint/20 rounded-3xl p-8 space-y-6">
                         <h3 className="font-extrabold text-brand-dark text-xl font-display">How is your recitation graded?</h3>
-                        
+
                         {/* Grades progress simulation */}
                         <div className="space-y-4 font-semibold text-xs sm:text-sm">
                             {[

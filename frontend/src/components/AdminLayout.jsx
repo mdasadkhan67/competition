@@ -2,7 +2,7 @@ import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/slices/authSlice";
 import { useEffect } from "react";
-import { FiHome, FiUsers, FiLogOut, FiSettings, FiDownload, FiCheck, FiAward } from "react-icons/fi";
+import { FiHome, FiUsers, FiLogOut, FiSettings, FiDownload, FiCheck, FiAward, FiMonitor } from "react-icons/fi";
 
 export default function AdminLayout() {
     const navigate = useNavigate();
@@ -42,13 +42,14 @@ export default function AdminLayout() {
         { name: "Lyrics", path: "/admin/lyrics", icon: <FiCheck className="text-xl" /> },
         { name: "Export", path: "/admin/export", icon: <FiDownload className="text-xl" /> },
         { name: "Limits", path: "/admin/config", icon: <FiSettings className="text-xl" /> },
+        { name: "LED Presenter", path: "/admin/led-display", icon: <FiMonitor className="text-xl" /> },
     ];
 
     return (
         <div className="flex h-screen bg-gray-50 font-sans">
             {/* Sidebar */}
             <div className="w-64 bg-brand-dark text-white flex flex-col shadow-2xl border-r border-brand-mint/10">
-                
+
                 {/* Sidebar Header */}
                 <div className="p-6 border-b border-white/5 flex items-center gap-3">
                     <img src="/logo.svg" alt="SDI Logo" className="w-10 h-10 bg-white rounded-full p-0.5 border border-brand-gold" />

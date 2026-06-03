@@ -48,7 +48,7 @@ export default function Leaderboard() {
 
     return (
         <div className="bg-gray-50 text-gray-800 font-sans">
-            
+
             {/* Page Header */}
             <section className="bg-brand-dark py-16 px-4 text-center text-white border-b border-brand-mint/10 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
@@ -87,11 +87,10 @@ export default function Leaderboard() {
                             <button
                                 key={cat}
                                 onClick={() => setCategory(cat)}
-                                className={`px-4 py-2.5 rounded-xl border transition-all cursor-pointer font-bold ${
-                                    category === cat
+                                className={`px-4 py-2.5 rounded-xl border transition-all cursor-pointer font-bold ${category === cat
                                     ? "bg-brand-primary border-brand-primary text-white shadow-md shadow-brand-primary/10"
                                     : "bg-white border-gray-200 text-gray-500 hover:bg-gray-50"
-                                }`}
+                                    }`}
                             >
                                 {cat}
                             </button>
@@ -102,17 +101,17 @@ export default function Leaderboard() {
                 {/* ================= PODIUM LAYOUT ================= */}
                 {orderedPodium.length > 0 && (
                     <div className="flex flex-col md:flex-row items-end justify-center gap-6 sm:gap-10 pt-16 pb-8 px-4 font-display">
-                        
+
                         {orderedPodium.map((cand, idx) => {
                             const isFirst = cand.displayRank === 1;
                             const isSecond = cand.displayRank === 2;
                             const isThird = cand.displayRank === 3;
-                            
+
                             // Height and styling variables
                             let heightClass = "h-48";
                             let podiumStyle = "bg-white border border-gray-100 shadow-lg";
                             let rankBadge = "bg-slate-100 border-slate-200 text-slate-500";
-                            
+
                             if (isFirst) {
                                 heightClass = "h-64 sm:h-72 order-1 md:order-2 z-10 scale-105 md:scale-110";
                                 podiumStyle = "bg-gradient-to-b from-[#064e43]/90 to-brand-dark/95 border border-brand-mint/30 shadow-2xl text-white soft-glow-emerald";
@@ -126,15 +125,14 @@ export default function Leaderboard() {
                             }
 
                             return (
-                                <div 
-                                    key={cand.id} 
+                                <div
+                                    key={cand.id}
                                     className={`w-full md:w-64 rounded-3xl flex flex-col justify-end items-center p-6 text-center transition-all hover:scale-[1.02] duration-300 ${heightClass} ${podiumStyle}`}
                                 >
                                     {/* Avatar placeholder with Rank icon */}
                                     <div className="relative mb-4">
-                                        <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center font-black text-2xl border-4 ${
-                                            isFirst ? "bg-white/10 border-brand-gold" : "bg-brand-light/30 border-brand-mint"
-                                        }`}>
+                                        <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center font-black text-2xl border-4 ${isFirst ? "bg-white/10 border-brand-gold" : "bg-brand-light/30 border-brand-mint"
+                                            }`}>
                                             {isFirst ? <FaTrophy className="text-brand-gold-light text-3xl" /> : cand.name[0]}
                                         </div>
                                         <span className={`absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-black border ${rankBadge}`}>

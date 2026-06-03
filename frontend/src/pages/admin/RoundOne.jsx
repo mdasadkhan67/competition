@@ -19,7 +19,7 @@ export default function AdminRoundOne() {
         if (u.payment?.status === "pending" || !u.payment?.status) return false;
 
         const matchesGroup = !filter || u.group === filter;
-        
+
         let matchesStatus = true;
         if (statusFilter === "pending") {
             matchesStatus = (u.payment?.status === "approved" && !u.isRound2Selected && !u.isRound1Rejected);
@@ -28,7 +28,7 @@ export default function AdminRoundOne() {
         } else if (statusFilter === "rejected") {
             matchesStatus = (u.payment?.status === "rejected" || u.registrationStatus === "rejected" || u.isRound1Rejected);
         }
-        
+
         return matchesGroup && matchesStatus;
     });
 
@@ -134,9 +134,17 @@ export default function AdminRoundOne() {
                                         <tr key={u._id} className={`transition duration-300 ${isFinal ? "bg-gray-50/50 opacity-60 grayscale-[0.5]" : "hover:bg-emerald-50/40"}`}>
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className={`h-10 w-10 rounded-full flex items-center justify-center text-white font-bold bg-gradient-to-r ${isApproved ? "from-emerald-500 to-teal-600" : "from-gray-400 to-gray-500"}`}>
-                                                        {u.name?.charAt(0).toUpperCase()}
-                                                    </div>
+                                                    {u.photo ? (
+                                                        <img
+                                                            src={`http://localhost:5000/${u.photo}`}
+                                                            alt={u.name}
+                                                            className="h-10 w-10 rounded-full object-cover border border-gray-200 shrink-0 shadow-xs"
+                                                        />
+                                                    ) : (
+                                                        <div className={`h-10 w-10 rounded-full flex items-center justify-center text-white font-bold bg-gradient-to-r ${isApproved ? "from-emerald-500 to-teal-600" : "from-gray-400 to-gray-500"} shrink-0 shadow-xs`}>
+                                                            {u.name?.charAt(0).toUpperCase()}
+                                                        </div>
+                                                    )}
                                                     <div>
                                                         <h3 className="font-semibold text-gray-900">{u.name}</h3>
                                                         <p className="text-xs text-gray-500">{u.naatTitle}</p>
@@ -240,9 +248,17 @@ export default function AdminRoundOne() {
                             <div key={u._id} className="p-4 space-y-4">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
-                                        <div className={`h-10 w-10 rounded-full flex items-center justify-center text-white font-bold ${isApproved ? "bg-emerald-500" : isRejected ? "bg-red-500" : "bg-gray-400"}`}>
-                                            {u.name?.charAt(0).toUpperCase()}
-                                        </div>
+                                        {u.photo ? (
+                                            <img
+                                                src={`http://localhost:5000/${u.photo}`}
+                                                alt={u.name}
+                                                className="h-10 w-10 rounded-full object-cover border border-gray-200 shrink-0 shadow-xs"
+                                            />
+                                        ) : (
+                                            <div className={`h-10 w-10 rounded-full flex items-center justify-center text-white font-bold ${isApproved ? "bg-emerald-500" : isRejected ? "bg-red-500" : "bg-gray-400"} shrink-0 shadow-xs`}>
+                                                {u.name?.charAt(0).toUpperCase()}
+                                            </div>
+                                        )}
                                         <div>
                                             <h3 className="font-bold text-gray-900">{u.name}</h3>
                                             <p className="text-xs text-gray-500">{u.group}</p>

@@ -1,4 +1,4 @@
-const { getAllRegistrations, updatePaymentStatus, getStats, deleteRegistration, toggleRoundSelection, rejectRound1 } = require("../model/admin-data-model");
+const { getAllRegistrations, updatePaymentStatus, getStats, deleteRegistration, toggleRoundSelection, rejectRound1, deleteRegistrationScore } = require("../model/admin-data-model");
 
 const getAllRegistrationsController = async (req, res) => {
     const result = await getAllRegistrations(req.query);
@@ -65,11 +65,23 @@ const rejectRound1Controller = async (req, res) => {
     });
 };
 
+const deleteRegistrationScoreController = async (req, res) => {
+    const { id, judgeId } = req.params;
+    const result = await deleteRegistrationScore(id, judgeId);
+
+    return res.status(result.status).json({
+        success: result.status < 400,
+        message: result.message,
+        data: result.data || {}
+    });
+};
+
 module.exports = {
     getAllRegistrationsController,
     updateStatusController,
     getStatsController,
     deleteRegistrationController,
     toggleRoundSelectionController,
-    rejectRound1Controller
+    rejectRound1Controller,
+    deleteRegistrationScoreController
 };
